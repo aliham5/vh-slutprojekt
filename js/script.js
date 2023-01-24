@@ -16,4 +16,55 @@ firebase.initializeApp(firebaseConfig);
 // initialize database
 const db = firebase.database();
 
+// Hämtar användarens data
+const username = prompt("Please tell us your name");
+
+
+// Form
+// lyssnar efter submit eventet på form elementet och anroper "postChat" funktionen
+document.getElementById("message-form").addEventListener("submit", sendMessage);
+
+
+// skicka meddelande till db
+function sendMessage(e) {
+    e.preventDefault();
+
+
+    // hämtar värdena som ska submittas
+    const timestamp = Date.now();
+    const messageInput = document.getElementById("message-input");
+    const message = messageInput.value;
+
+
+    // Rensar input boxen
+    messageInput.value = "";
+
+
+    //Auto scroll till botten
+    document
+        .getElementById("messages")
+        .scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+
+
+    // Skapar db collection och skickar in datan
+    db.ref("messages/" + timestamp).set({
+        username,
+        message,
+    });
+}
+
+
+// Visa meddelanden
+// refererar till collection som gjordes tidigare
+const fetchChat = db.ref("messages/");
+
+
+//  Använder onChildAdded event listenern för att checka efter nya meddelanden
+fetchChat.on("child_added", function (snapshot) {
+    const messages = snapshot.val();
+    const message = `<li class=${username === messages.username ? "sent" : "receive"
+        }><span>${messages.username}: </span>${messages.message}</li>`;
+    // append the message on the page
+    document.getElementById("messages").innerHTML += message;
+});
 
