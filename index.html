@@ -10,11 +10,21 @@
   </head>
 
   <body>
-    <h1>ForkIt messega app</h1>
-    <form>
-      <input type="text" placeholder="Write your message here" />
-      <button>Send</button>
-    </form>
-    <p>hej</p>
+    <h1>ForkIt message app</h1>
+
+    <div id="chat">
+      <!-- Listan som meddelandena ska visas i -->
+      <ul id="messages"></ul>
+
+      <!-- En form där man ska kunna skicka meddelandena i -->
+      <form id="message-form">
+        <input
+          id="message-input"
+          type="text"
+          placeholder="Write your message here..."
+        />
+        <button id="message-btn" type="submit">Send</button>
+      </form>
+    </div>
   </body>
 </html>
