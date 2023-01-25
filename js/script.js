@@ -67,7 +67,5 @@ fetchChat.on("child_added", function (snapshot) {
     const li = document.createElement("li");
     li.innerHTML = `<span>${messages.username}: </span>${messages.message}`;
     document.getElementById("messages").appendChild(li);
-    const lil = document.createElement("li");
-    li.innerHTML = `<span>${messages.username}: </span>${messages.message}`;
-    document.getElementById("message").appendChild(li);
+   
 });  
