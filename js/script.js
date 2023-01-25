@@ -60,18 +60,11 @@ const fetchChat = db.ref("messages/");
 
 
 //  Använder onChildAdded event listenern för att checka efter nya meddelanden
-// fetchChat.on("child_added", function (snapshot) {
-//     const messages = snapshot.val();
-//     const message = `<li class=${username === messages.username ? "sent" : "receive"
-//         }><span>${messages.username}: </span>${messages.message}</li>`;
-//     // append the message on the page
-//     document.getElementById("messages").innerHTML += message;
-// });
-
-//  Använder onChildAdded event listenern för att checka efter nya meddelanden
 fetchChat.on("child_added", function (snapshot) {
     const messages = snapshot.val();
     const message = `<li><span>${messages.username}: </span>${messages.message}</li>`;
     // append the message on the page
-    document.getElementById("messages").innerHTML += message;
+    const li = document.createElement("li");
+    li.innerHTML = `<span>${messages.username}: </span>${messages.message}`;
+    document.getElementById("messages").appendChild(li);
 });  
