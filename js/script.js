@@ -19,9 +19,6 @@ const db = firebase.database();
 // Hämtar användarens data
 const username = prompt("Please tell us your name");
 
-messages.read = true;
-messages.write = true;
-
 // Form
 // lyssnar efter submit eventet på form elementet och anroper "postChat" funktionen
 document.getElementById("message-form").addEventListener("submit", sendMessage);
@@ -67,5 +64,5 @@ fetchChat.on("child_added", function (snapshot) {
     const li = document.createElement("li");
     li.innerHTML = `<span>${messages.username}: </span>${messages.message}`;
     document.getElementById("messages").appendChild(li);
-   
+
 });  
